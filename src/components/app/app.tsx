@@ -23,15 +23,11 @@ import {
   clearOrderByNumber,
   getNumber
 } from '../../services/orderNumber/slice';
-import {
-  clearSelectIngredient,
-  getSelectIngredient
-} from '../../services/ingredients/slice';
+import { clearSelectIngredient } from '../../services/ingredients/slice';
 
 export const App = () => {
   const dispatch = useDispatch();
   const numberOrder = useSelector(getNumber);
-  const selectIngredient = useSelector(getSelectIngredient);
   const navigate = useNavigate();
   const location = useLocation();
   const backgroundLocation = location.state?.background;
