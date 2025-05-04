@@ -46,10 +46,8 @@ export const App = () => {
       dispatch(clearOrderByNumber());
       return navigate(-1);
     }
-    if (selectIngredient) {
-      dispatch(clearSelectIngredient());
-      return navigate(-1);
-    }
+    dispatch(clearSelectIngredient());
+    return navigate(-1);
   };
 
   return (
