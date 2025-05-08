@@ -1,24 +1,54 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
+import { useDispatch, useSelector } from '../../services/store';
+import { getConstructorSelector } from '../../services/burgerConstructor/slice';
+import { orderBurgerThunk } from '../../services/order/actions';
+import { getUser } from '../../services/user/slice';
+import { useNavigate } from 'react-router-dom';
+import {
+  deleteMyOrder,
+  getMyOrder,
+  getOrderRequest,
+  getSuccessOrder,
+  setOrderRequest
+} from '../../services/order/slice';
 
 export const BurgerConstructor: FC = () => {
-  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const constructorItems = {
-    bun: {
-      price: 0
-    },
-    ingredients: []
-  };
-
-  const orderRequest = false;
-
-  const orderModalData = null;
+  const dispatch = useDispatch();
+  const user = useSelector(getUser);
+  const constructorItems = useSelector(getConstructorSelector);
+  const orderRequest = useSelector(getOrderRequest);
+  const successOrder = useSelector(getSuccessOrder);
+  const orderModalData = useSelector(getMyOrder);
+  const navigate = useNavigate();
 
   const onOrderClick = () => {
-    if (!constructorItems.bun || orderRequest) return;
+    if (!user) {
+      return navigate('/login');
+    }
+
+    if (!constructorItems.bun || orderRequest) {
+      return console.log('Ошибка при создании заказа');
+    }
+
+    const order = [
+      constructorItems.bun._id,
+      ...constructorItems.ingredients.map((item) => item._id),
+      constructorItems.bun._id
+    ];
+
+    dispatch(orderBurgerThunk(order));
   };
-  const closeOrderModal = () => {};
+
+  const closeOrderModal = () => {
+    if (orderRequest) {
+      return dispatch(setOrderRequest(false));
+    }
+    if (orderModalData) {
+      return dispatch(deleteMyOrder());
+    }
+  };
 
   const price = useMemo(
     () =>
@@ -30,8 +60,6 @@ export const BurgerConstructor: FC = () => {
     [constructorItems]
   );
 
-  return null;
-
   return (
     <BurgerConstructorUI
       price={price}
@@ -40,6 +68,7 @@ export const BurgerConstructor: FC = () => {
       orderModalData={orderModalData}
       onOrderClick={onOrderClick}
       closeOrderModal={closeOrderModal}
+      successOrder={successOrder}
     />
   );
 };
