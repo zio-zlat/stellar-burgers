@@ -1,4 +1,4 @@
-import { getIsAuthChecked, getUser } from '../../services/user/slice';
+import { getIsAuthChecked, getUser } from '../../services/user/userSlice';
 import { Preloader } from '../ui';
 import { useSelector } from '../../services/store';
 import { Navigate, useLocation } from 'react-router-dom';
