@@ -35,3 +35,16 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('ingredients', () => {
+  cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients' }).as(
+    'ingredientsRes'
+  );
+
+  cy.visit('/');
+
+  cy.wait('@ingredientsRes').then((interception) => {
+    const data = interception.response?.body.data;
+    cy.wrap(data).as('ingredientData');
+  });
+});
