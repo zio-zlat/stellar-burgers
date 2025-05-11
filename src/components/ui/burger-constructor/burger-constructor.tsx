@@ -76,7 +76,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       {constructorItems.bun ? (
         <div
           className={`${styles.element} mt-4 mr-4`}
-          data-testId='burger_bun-bottom'
+          data-testid='burger_bun-bottom'
         >
           <ConstructorElement
             type='bottom'

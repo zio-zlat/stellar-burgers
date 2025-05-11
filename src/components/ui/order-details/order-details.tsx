@@ -9,7 +9,7 @@ export const OrderDetailsUI: React.FC<OrderDetailsUIProps> = ({
   <>
     <h2
       className={`${styles.title} text text_type_digits-large mt-2 mb-4`}
-      data-testId='order_number'
+      data-testid='order_number'
     >
       {orderNumber}
     </h2>

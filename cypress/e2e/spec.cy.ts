@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import {TIngredient} from 'src/utils/types'
+import {TIngredient} from '../../src/utils/types'
 
 describe('тест страницы конструктора бургера', () => {
   describe('добавление ингредиента из списка в конструктор', () => {
@@ -80,10 +80,9 @@ describe('тест страницы конструктора бургера', ()
     beforeEach(() => {
       cy.intercept('GET', 'api/ingredients', { fixture: 'ingredients' });
       cy.intercept('GET', 'api/auth/user', { fixture: 'user' });
-      cy.setCookie('accessToken', 'test-token').as('mockToken');
+      cy.setCookie('accessToken', 'test-token');
 
       cy.visit('http://localhost:4000/');
-      console.log(cy.fixture('accessToken.json'));
     });
 
     it('выполнение всех действий', () => {
@@ -103,6 +102,7 @@ describe('тест страницы конструктора бургера', ()
           cy.wait('@order').then((data) => {
             //проверка токена
             expect(data.request?.headers.authorization).to.eq('test-token');
+            cy.clearCookie('accessToken')
 
             //запрос на создание заказа был выполнен по верным id
             expect(data.request.body.ingredients).to.deep.equal(
