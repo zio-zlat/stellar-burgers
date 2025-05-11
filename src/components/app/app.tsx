@@ -16,14 +16,14 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
-import { getIngredientsThunk } from '../../services/ingredients/actions';
+import { getIngredientsThunk } from '../../services/ingredients/ingredientsActions';
 import { ProtectedRoute } from '../protected-route/ProtectedRoute';
-import { checkUser } from '../../services/user/actions';
+import { checkUser } from '../../services/user/userActions';
 import {
   clearOrderByNumber,
   getNumber
-} from '../../services/orderNumber/slice';
-import { clearSelectIngredient } from '../../services/ingredients/slice';
+} from '../../services/orderNumber/orderNumberSlice';
+import { clearSelectIngredient } from '../../services/ingredients/ingredientsSlice';
 
 export const App = () => {
   const dispatch = useDispatch();

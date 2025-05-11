@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
-import { getIngredientsThunk } from './actions';
+import { getIngredientsThunk } from './ingredientsActions';
 
 type TIngredientsState = {
   ingredients: TIngredient[];
@@ -9,7 +9,7 @@ type TIngredientsState = {
   error: string | undefined;
 };
 
-const initialState: TIngredientsState = {
+export const initialState: TIngredientsState = {
   ingredients: [],
   selectIngredient: undefined,
   isIngredientsLoading: false,

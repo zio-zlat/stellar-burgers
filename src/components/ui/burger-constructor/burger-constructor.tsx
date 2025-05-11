@@ -10,8 +10,8 @@ import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorElement, Modal } from '@components';
 import { Preloader, OrderDetailsUI } from '@ui';
 import { useDispatch } from '../../../services/store';
-import { deleteBurgerIngredients } from '../../../services/burgerConstructor/slice';
-import { setSuccessOrder } from '../../../services/order/slice';
+import { deleteBurgerIngredients } from '../../../services/burgerConstructor/burgerConstructorSlice';
+import { setSuccessOrder } from '../../../services/order/orderSlice';
 
 export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   constructorItems,
@@ -34,7 +34,10 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   return (
     <section className={styles.burger_constructor}>
       {constructorItems.bun ? (
-        <div className={`${styles.element} mb-4 mr-4`}>
+        <div
+          className={`${styles.element} mb-4 mr-4`}
+          data-testid='burger_bun-top'
+        >
           <ConstructorElement
             type='top'
             isLocked
@@ -71,7 +74,10 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
         )}
       </ul>
       {constructorItems.bun ? (
-        <div className={`${styles.element} mt-4 mr-4`}>
+        <div
+          className={`${styles.element} mt-4 mr-4`}
+          data-testid='burger_bun-bottom'
+        >
           <ConstructorElement
             type='bottom'
             isLocked
@@ -87,7 +93,7 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
           Выберите булки
         </div>
       )}
-      <div className={`${styles.total} mt-10 mr-4`}>
+      <div className={`${styles.total} mt-10 mr-4`} data-testid='order'>
         <div className={`${styles.cost} mr-10`}>
           <p className={`text ${styles.text} mr-2`}>{price}</p>
           <CurrencyIcon type='primary' />

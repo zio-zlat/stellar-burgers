@@ -5,35 +5,31 @@ import { useDispatch, useSelector } from '../../services/store';
 import {
   getConstructorSelector,
   removeIngredient,
-  setBurgerIngredients
-} from '../../services/burgerConstructor/slice';
+  sortIngredients
+} from '../../services/burgerConstructor/burgerConstructorSlice';
 
 export const BurgerConstructorElement: FC<BurgerConstructorElementProps> = memo(
   ({ ingredient, index, totalItems }) => {
     const dispatch = useDispatch();
     const burgerConstructor = useSelector(getConstructorSelector);
 
-    let newConstructor = [...burgerConstructor.ingredients];
-    let indexIngredient = newConstructor.indexOf(ingredient);
-    let ingredientDown = newConstructor[indexIngredient + 1];
-    let indexIngredientDown = newConstructor.indexOf(ingredientDown);
-    let ingredientUp = newConstructor[indexIngredient - 1];
-    let indexIngredientUp = newConstructor.indexOf(ingredientUp);
+    let indexIngredient = burgerConstructor.ingredients.indexOf(ingredient);
+    let ingredientDown = burgerConstructor.ingredients[indexIngredient + 1];
+    let indexIngredientDown =
+      burgerConstructor.ingredients.indexOf(ingredientDown);
+    let ingredientUp = burgerConstructor.ingredients[indexIngredient - 1];
+    let indexIngredientUp = burgerConstructor.ingredients.indexOf(ingredientUp);
 
     const handleMoveDown = () => {
-      [newConstructor[indexIngredient], newConstructor[indexIngredientDown]] = [
-        newConstructor[indexIngredientDown],
-        newConstructor[indexIngredient]
-      ];
-      dispatch(setBurgerIngredients(newConstructor));
+      dispatch(
+        sortIngredients({ from: indexIngredient, to: indexIngredientDown })
+      );
     };
 
     const handleMoveUp = () => {
-      [newConstructor[indexIngredientUp], newConstructor[indexIngredient]] = [
-        newConstructor[indexIngredient],
-        newConstructor[indexIngredientUp]
-      ];
-      dispatch(setBurgerIngredients(newConstructor));
+      dispatch(
+        sortIngredients({ from: indexIngredient, to: indexIngredientUp })
+      );
     };
 
     const handleClose = () => {

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { orderBurgerThunk } from './actions';
+import { orderBurgerThunk } from './orderActions';
 
 type TOrderState = {
   orderRequest: boolean;
@@ -9,7 +9,7 @@ type TOrderState = {
   success: boolean;
 };
 
-const initialState: TOrderState = {
+export const initialState: TOrderState = {
   orderRequest: false,
   order: null,
   error: undefined,

@@ -6,7 +6,7 @@ import {
   logoutUser,
   registerUser,
   updateUser
-} from './actions';
+} from './userActions';
 
 type TUserState = {
   isAuthChecked: boolean;
@@ -16,7 +16,7 @@ type TUserState = {
   user: TUser | undefined;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   loginUserError: undefined,
   registerUserError: undefined,

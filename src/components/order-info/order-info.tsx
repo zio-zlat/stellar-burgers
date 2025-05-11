@@ -3,10 +3,10 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
-import { getOrderByNumberThunk } from '../../services/orderNumber/actions';
+import { getOrderByNumberThunk } from '../../services/orderNumber/orderNumberActions';
 import { useParams } from 'react-router-dom';
-import { getOrderByNumber } from '../../services/orderNumber/slice';
-import { getIngredients } from '../../services/ingredients/slice';
+import { getOrderByNumber } from '../../services/orderNumber/orderNumberSlice';
+import { getIngredients } from '../../services/ingredients/ingredientsSlice';
 
 export const OrderInfo: FC = () => {
   /** TODO: взять переменные orderData и ingredients из стора */
