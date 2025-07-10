@@ -10,7 +10,7 @@ import {
 
 import { TBurgerIngredientUIProps } from './type';
 import { useDispatch } from '../../../services/store';
-import { setSelectIngredient } from '../../../services/ingredients/slice';
+import { setSelectIngredient } from '../../../services/ingredients/ingredientsSlice';
 
 export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
   ({ ingredient, count, handleAdd, locationState }) => {
@@ -22,11 +22,16 @@ export const BurgerIngredientUI: FC<TBurgerIngredientUIProps> = memo(
     };
 
     return (
-      <li className={styles.container} onClick={onClickIngredient}>
+      <li
+        className={styles.container}
+        onClick={onClickIngredient}
+        data-testid={`ingredient_${ingredient.type}`}
+      >
         <Link
           className={styles.article}
           to={`/ingredients/${_id}`}
           state={locationState}
+          data-testid='ingredient_link'
         >
           {count && <Counter count={count} />}
           <img className={styles.img} src={image} alt='картинка ингредиента.' />

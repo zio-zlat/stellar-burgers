@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TOrder } from '@utils-types';
-import { getOrderByNumberThunk } from './actions';
+import { getOrderByNumberThunk } from './orderNumberActions';
 
 type TOrderByNumberState = {
   order: TOrder | undefined;
   error: string | undefined;
 };
 
-const initialState: TOrderByNumberState = {
+export const initialState: TOrderByNumberState = {
   order: undefined,
   error: undefined
 };
